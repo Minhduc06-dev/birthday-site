@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffe6f7, #fff0f0);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  top: 30vh;
+}
+
+h1 {
+  font-size: 3em;
+  color: #ff66b2;
+  text-shadow: 2px 2px #fff;
+}
+
+p {
+  font-size: 1.5em;
+  color: #ff3399;
+}
+
+button {
+  background: #ff99cc;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: white;
+  margin-top: 20px;
+  box-shadow: 0 4px #cc6699;
+}
+
+button:hover {
+  background: #ff66b2;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  pointer-events: none;
+}
