@@ -23,7 +23,6 @@ function hienChuLanLuot() {
   });
 }
 
-// ---- Pháo hoa ----
 let hatphao = [];
 
 function taoHatPhao() {
