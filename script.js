@@ -1,72 +1,69 @@
-const loichuc = [
-  "Chúc bạn tuổi mới thật hạnh phúc và rực rỡ 🎂💖",
-  "Chúc sinh nhật thật vui và đầy tiếng cười 🥳",
-  "Chúc mọi điều tốt đẹp nhất sẽ đến với bạn 🎈",
-  "Thêm một tuổi, thêm nhiều niềm vui và may mắn 🎁"
-];
-
-const p = document.getElementById("loichuc");
 const nut = document.getElementById("nut");
-const canvas = document.getElementById("canvas");
+const loichuc = document.querySelector(".loichuc");
+const cacDong = loichuc.querySelectorAll("h1, p");
+const canvas = document.getElementById("phaohoa");
 const ctx = canvas.getContext("2d");
+
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-function hienthichuc() {
-  const i = Math.floor(Math.random() * loichuc.length);
-  p.textContent = loichuc[i];
-  for (let i = 0; i < 50; i++) themConfetti();
+function batDau() {
+  nut.style.display = "none";
+  hienChuLanLuot();
+  chayPhaoHoa();
 }
 
-nut.onclick = hienthichuc;
+nut.onclick = batDau;
 
-// Hiệu ứng bóng bay và confetti
-let bongbay = [], confetti = [];
-
-function taoBongBay() {
-  bongbay.push({
-    x: Math.random() * canvas.width,
-    y: canvas.height + 20,
-    size: 20 + Math.random() * 20,
-    speed: 1 + Math.random() * 2,
-    color: `hsl(${Math.random() * 360}, 70%, 60%)`
+function hienChuLanLuot() {
+  cacDong.forEach((dong, i) => {
+    setTimeout(() => {
+      dong.classList.add("hien");
+    }, i * 2000 + 1000);
   });
 }
 
-function themConfetti() {
-  confetti.push({
-    x: Math.random() * canvas.width,
-    y: -10,
-    size: 5 + Math.random() * 5,
-    speed: 2 + Math.random() * 3,
-    color: `hsl(${Math.random() * 360}, 80%, 60%)`
-  });
+// ---- Pháo hoa ----
+let hatphao = [];
+
+function taoHatPhao() {
+  for (let i = 0; i < 5; i++) {
+    hatphao.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height * 0.8,
+      size: Math.random() * 3 + 1,
+      mau: `hsl(${Math.random() * 360},100%,70%)`,
+      tocdoX: (Math.random() - 0.5) * 2,
+      tocdoY: (Math.random() - 0.5) * 2,
+      alpha: 1,
+      giam: Math.random() * 0.01 + 0.005
+    });
+  }
 }
 
-function ve() {
+function vePhaoHoa() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  bongbay.forEach((b, i) => {
-    b.y -= b.speed;
+  hatphao.forEach((p, i) => {
     ctx.beginPath();
-    ctx.fillStyle = b.color;
-    ctx.ellipse(b.x, b.y, b.size * 0.6, b.size, 0, 0, 2 * Math.PI);
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fillStyle = p.mau;
+    ctx.globalAlpha = p.alpha;
     ctx.fill();
-    if (b.y < -50) bongbay.splice(i, 1);
+    p.x += p.tocdoX;
+    p.y += p.tocdoY;
+    p.alpha -= p.giam;
+    if (p.alpha <= 0) hatphao.splice(i, 1);
   });
-
-  confetti.forEach((c, i) => {
-    c.y += c.speed;
-    ctx.fillStyle = c.color;
-    ctx.fillRect(c.x, c.y, c.size, c.size);
-    if (c.y > canvas.height) confetti.splice(i, 1);
-  });
+  ctx.globalAlpha = 1;
 }
 
-function capnhat() {
-  if (Math.random() < 0.03) taoBongBay();
-  ve();
-  requestAnimationFrame(capnhat);
+function chayPhaoHoa() {
+  if (Math.random() < 0.15) taoHatPhao();
+  vePhaoHoa();
+  requestAnimationFrame(chayPhaoHoa);
 }
 
-capnhat();
+window.addEventListener("resize", () => {
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+});
