@@ -1,48 +1,66 @@
 body {
   margin: 0;
   overflow: hidden;
-  background: linear-gradient(135deg, #ffe6f7, #fff0f0);
   font-family: 'Poppins', sans-serif;
-  text-align: center;
+  background-color: #0b0c10;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container {
   position: relative;
   z-index: 10;
-  top: 30vh;
-}
-
-h1 {
-  font-size: 3em;
-  color: #ff66b2;
-  text-shadow: 2px 2px #fff;
-}
-
-p {
-  font-size: 1.5em;
-  color: #ff3399;
+  text-align: center;
 }
 
 button {
-  background: #ff99cc;
-  border: none;
-  border-radius: 25px;
-  padding: 10px 25px;
-  font-size: 1.2em;
-  cursor: pointer;
+  background: linear-gradient(45deg, #ff77a9, #ffb3d9);
   color: white;
-  margin-top: 20px;
-  box-shadow: 0 4px #cc6699;
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.3rem;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 182, 193, 0.6);
+  transition: transform 0.3s;
 }
 
 button:hover {
-  background: #ff66b2;
+  transform: scale(1.05);
+}
+
+.loichuc {
+  margin-top: 30px;
+}
+
+.loichuc h1,
+.loichuc p {
+  font-size: 1.6rem;
+  margin: 10px 0;
+  color: #ffcce6;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  text-shadow: 0 0 8px rgba(255, 182, 193, 0.7);
+  visibility: hidden;
+}
+
+.hien {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  visibility: visible !important;
 }
 
 canvas {
   position: fixed;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none;
 }
